@@ -12,24 +12,32 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String
   },
-  posts: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref:  'Post'
-  }],
-  dp: {
-    type: String,
-    default: '' // Default profile picture URL
-  },
   email: {
     type: String,
     required: true,
     unique: true,
     trim: true
   },
-  fullname: {
+});
+
+const expenseSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId, // Reference to the User
+    ref: 'User',
+    required: true
+  },
+  amount: {
+    type: Number,
+    required: true
+  },
+  category: {
     type: String,
     required: true,
     trim: true
+  },
+  date: {
+    type: Date,
+    default: Date.now // Automatically sets to the current date and time
   }
 });
 
